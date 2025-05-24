@@ -1,30 +1,14 @@
 import type { FC } from "react";
 
-type DivProps = React.DetailedHTMLProps<
-  React.HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->;
-
-type CustomProps = {
+interface CustomProps extends React.HTMLAttributes<HTMLDivElement> {
   aa?: string;
-  onClick?: () => void;
-};
+}
 
-type xx = React.PropsWithChildren<DivProps & CustomProps>;
-
-// const Test: FC<xx> = (...props) => {
-//   console.log(props);
-//   return (
-//     <div style={props[0]["style"]} onClick={props[0]["onClick"]}>
-//       TEst
-//     </div>
-//   );
-// };
-
-const Test: FC<xx> = ({ style, onClick }) => {
+const Test: FC<CustomProps> = ({ style, onClick, children }) => {
   return (
     <div style={style} onClick={onClick}>
       TEst
+      <p>{children}</p>
     </div>
   );
 };
