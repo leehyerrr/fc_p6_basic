@@ -1,3 +1,4 @@
+import type { FC, ComponentProps } from "react";
 import type { widthChild } from "./type";
 
 // type ReactH1Props = DetailedHTMLProps<
@@ -12,7 +13,7 @@ import type { widthChild } from "./type";
 //   return <h1 style={style}>{children}</h1>;
 // };
 
-const Container: widthChild = ({ children, style }) => {
+const Container: FC<ComponentProps<"div">> = ({ children, style }) => {
   return <h1 style={style}>{children}</h1>;
 };
 

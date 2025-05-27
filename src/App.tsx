@@ -1,39 +1,49 @@
-import Container from "./Container";
-import Destination from "./Destination";
-import Test from "./Test";
-import Greeting from "./Greeting";
+import { useRef, useState } from "react";
 
-function App() {
-  const destinations = [
-    {
-      place: "파리",
-      description: "에팔탑과 카페가 있는 도시",
-    },
-  ];
-  const onClick = () => {
-    console.log("dd");
+function FocusInput() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    inputRef.current?.focus();
   };
+
   return (
     <div>
-      {/* <Greeting name={"Alice"} />
-      <Greeting name={"Bob"} /> */}
-      <Container style={{ backgroundColor: "orange" }}>여행 지역</Container>
-      <Container>여행 지역22</Container>
-      {/* <h1>여행 지역</h1> */}
-      <Destination
-        place={"파리"}
-        description={"에펠탑과 카페가 있는 도시"}
-        style={{ backgroundColor: "blue" }}
-      />
-      <Destination {...destinations[0]}>ddd</Destination>
-      <Destination style={{ backgroundColor: "red" }} />
-      <Destination />
-      {/* 안됨. {}안에는 ...만
-      <Destination {{place: "파리", description: "에팔탑과 카페가 있는 도시"}} /> 
-      */}
-      <Test style={{ backgroundColor: "red" }} aa="ㄴㄴㄴ" onClick={onClick}>
-        ttt
-      </Test>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleClick}>focus</button>
+    </div>
+  );
+}
+
+function App() {
+  //   const ref = useRef(0);
+  //   console.log(ref.current);
+
+  // const [seconds, setSeconds] = useState(0);
+  // const timerRef = useRef(null);
+  const [seconds, setSeconds] = useState<number>(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleStart = () => {
+    if (timerRef.current) return;
+    timerRef.current = setInterval(() => {
+      setSeconds((pre) => pre + 1);
+    }, 1000);
+  };
+
+  const handleEnd = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+
+  return (
+    <div>
+      <h1>Timer: {seconds}</h1>
+      <button onClick={handleStart}>Start</button>
+      <button onClick={handleEnd}>End</button>
+      <FocusInput />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import type {
   HTMLAttributes,
 } from "react";
 import type { ReactDiveProps } from "./type";
+import Test2 from "./Test2";
 
 // type ReactDiveProps = DetailedHTMLProps<
 //   React.HTMLAttributes<HTMLDivElement>,
@@ -77,12 +78,14 @@ const Destination: FC<DestinationProps> = ({
   description = "남산타워 와 한강이 있는 도시",
   style,
   children,
+  ...rest
 }) => {
   return (
     <div style={style}>
       <h2>{place}</h2>
       <p>{description}</p>
       <p>{children}</p>
+      <Test2 {...rest}>test2</Test2>
     </div>
   );
 };

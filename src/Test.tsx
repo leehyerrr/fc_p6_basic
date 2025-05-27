@@ -1,16 +1,31 @@
-import type { FC } from "react";
-
-interface CustomProps extends React.HTMLAttributes<HTMLDivElement> {
-  aa?: string;
-}
-
-const Test: FC<CustomProps> = ({ style, onClick, children }) => {
+function Parent(props: { name: string; age?: number }) {
+  console.log(props);
   return (
-    <div style={style} onClick={onClick}>
-      TEst
-      <p>{children}</p>
+    <div>
+      <Child {...props} />
+      {/* {props.age} */}
     </div>
   );
-};
+}
 
-export default Test;
+function Child(props: { name: string; age?: number }) {
+  return <div>{props.age}</div>;
+}
+
+export default function Test() {
+  const user = {
+    name: "sss",
+    age: 22,
+  };
+  //   const user = [
+  //     {
+  //       name: "ddd",
+  //     },
+  //   ];
+  return (
+    <div>
+      {/* <Parent {...user[0]} /> */}
+      <Parent {...user} />
+    </div>
+  );
+}
